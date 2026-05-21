@@ -3,11 +3,59 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Future Tech Associates — premier electrical contracting, engineering, and consulting services in Kozhikode, Kerala.">
+  <title>Future Tech Associates | Electrical Contracting &amp; Engineering — Kozhikode</title>
+  <meta name="description" content="Future Tech Associates — premier electrical contracting, engineering, and consulting in Kozhikode, Kerala. Installations, panel upgrades, HT metering, inspections &amp; 24/7 support. Call +91 7012394124.">
+  <meta name="author" content="Future Tech Associates">
+  <meta name="keywords" content="electrical contractor Kozhikode, electrical engineering Kerala, panel upgrade, HT metering, Future Tech Associates">
   <meta name="theme-color" content="#f40101">
-  <meta property="og:title" content="Future Tech Associates">
-  <meta property="og:image" content="logo.png">
-  <title>Future Tech Associates | Electrical Contracting & Engineering</title>
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="" id="canonicalUrl">
+  <link rel="icon" href="logo.png" type="image/png" sizes="any" id="favicon">
+  <link rel="apple-touch-icon" href="logo.png" id="appleTouchIcon">
+  <!-- Deploy: set your live URL in futuretech-public-url for best link previews (e.g. https://www.yoursite.com/) -->
+  <meta name="futuretech-public-url" content="">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Future Tech Associates">
+  <meta property="og:title" content="Future Tech Associates | Electrical Contracting &amp; Engineering">
+  <meta property="og:description" content="Premier electrical contracting, engineering &amp; consulting in Kozhikode, Kerala. Safe, reliable power solutions for homes, businesses &amp; industry.">
+  <meta property="og:url" content="" id="ogUrl">
+  <meta property="og:image" content="logo.png" id="ogImage">
+  <meta property="og:image:alt" content="Future Tech Associates — electrical contracting Kozhikode">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:locale" content="en_IN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Future Tech Associates | Electrical Contracting Kozhikode">
+  <meta name="twitter:description" content="Electrical installations, panel upgrades, HT metering &amp; consulting in Kerala. WhatsApp +91 7012394124.">
+  <meta name="twitter:image" content="logo.png" id="twitterImage">
+  <meta name="twitter:image:alt" content="Future Tech Associates logo">
+  <script>
+  (function() {
+    var custom = (document.querySelector('meta[name="futuretech-public-url"]') || {}).content || '';
+    custom = custom.trim().replace(/\/?$/, '/');
+    var base, pageUrl;
+    if (custom) {
+      base = custom;
+      var path = (location.pathname || '/index.html').replace(/^\//, '');
+      pageUrl = custom.replace(/\/?$/, '') + (path ? '/' + path : '');
+    } else if (location.protocol !== 'file:' && location.origin) {
+      var p = location.pathname || '/';
+      var dir = p.endsWith('/') ? p : p.substring(0, p.lastIndexOf('/') + 1) || '/';
+      base = location.origin + dir;
+      pageUrl = location.origin + p + (location.search || '');
+    } else return;
+    var imageUrl = new URL('logo.png', base).href;
+    function setAttr(sel, attr, val) {
+      var el = document.querySelector(sel);
+      if (el) el.setAttribute(attr, val);
+    }
+    setAttr('#ogImage', 'content', imageUrl);
+    setAttr('#twitterImage', 'content', imageUrl);
+    setAttr('#ogUrl', 'content', pageUrl);
+    setAttr('#canonicalUrl', 'href', pageUrl);
+    setAttr('#favicon', 'href', imageUrl);
+    setAttr('#appleTouchIcon', 'href', imageUrl);
+  })();
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
@@ -527,8 +575,23 @@
     .social-btn.fb { background: #1877f2; }
     .social-btn.li { background: #0a66c2; }
     .social-btn.tw { background: #000; }
-    #qrcode { display: flex; justify-content: center; margin: 1rem 0; }
-    #qrcode img { margin: 0 auto; }
+    .qrcode-wrap {
+      display: none; flex-direction: column; align-items: center;
+      margin: 1rem auto; padding: 1.25rem;
+      background: #ffffff; border-radius: var(--radius);
+      border: 3px solid var(--primary); max-width: 280px;
+      box-shadow: 0 4px 20px rgba(244,1,1,0.12);
+    }
+    .qrcode-wrap.visible { display: flex; }
+    .qrcode-wrap p {
+      font-family: 'Poppins', sans-serif; font-size: 0.85rem;
+      color: var(--text-muted); margin-bottom: 0.75rem; text-align: center;
+    }
+    #qrcode { display: flex; justify-content: center; line-height: 0; }
+    #qrcode img, #qrcode canvas {
+      display: block !important; margin: 0 auto;
+      border-radius: 4px;
+    }
     /* Footer */
     footer {
       background: var(--footer-bg); color: rgba(255,255,255,0.85);
@@ -908,7 +971,10 @@
         <div class="share-card" id="showQR" tabindex="0" role="button" aria-label="Show QR code"><div class="share-card-icon">📱</div><span>QR Code</span></div>
         <div class="share-card" id="showSocial" tabindex="0" role="button" aria-label="Share on social media"><div class="share-card-icon">📤</div><span>Share on Social</span></div>
       </div>
-      <div id="qrcode" style="display:none"></div>
+      <div class="qrcode-wrap" id="qrcodeWrap">
+        <p>Scan to open our website</p>
+        <div id="qrcode"></div>
+      </div>
       <div class="social-share" id="socialShare">
         <a class="social-btn wa" id="shareWA" target="_blank" rel="noopener">WhatsApp</a>
         <a class="social-btn fb" id="shareFB" target="_blank" rel="noopener">Facebook</a>
@@ -1157,12 +1223,17 @@
 
     /* Share modal */
     const shareModal = document.getElementById('shareModal');
-    const pageUrl = encodeURIComponent(window.location.href);
-    const pageTitle = encodeURIComponent('Future Tech Associates');
+    const qrcodeWrap = document.getElementById('qrcodeWrap');
+    const SHARE_PAGE_URL = window.location.href.split('#')[0];
+    const SHARE_TITLE = 'Future Tech Associates — Electrical Contracting, Kozhikode';
+    const SHARE_TEXT = 'Premier electrical contracting & engineering in Kerala. Installations, panel upgrades & HT metering.';
+    const pageUrlEnc = encodeURIComponent(SHARE_PAGE_URL);
+    const pageTitleEnc = encodeURIComponent(SHARE_TITLE);
+    const pageTextEnc = encodeURIComponent(SHARE_TEXT);
     document.getElementById('shareFab').addEventListener('click', () => {
       shareModal.classList.add('open');
       document.getElementById('socialShare').classList.remove('show');
-      document.getElementById('qrcode').style.display = 'none';
+      qrcodeWrap.classList.remove('visible');
       document.getElementById('shareMain').style.display = 'grid';
     });
     document.getElementById('shareModalClose').addEventListener('click', () => shareModal.classList.remove('open'));
@@ -1173,24 +1244,53 @@
         shareModal.classList.remove('open');
       });
     });
+    function paintQrCanvas(canvas) {
+      if (!canvas || !canvas.getContext) return;
+      var ctx = canvas.getContext('2d');
+      var w = canvas.width, h = canvas.height;
+      var imgData = ctx.getImageData(0, 0, w, h);
+      var d = imgData.data;
+      for (var i = 0; i < d.length; i += 4) {
+        if (d[i] < 128) {
+          d[i] = 244; d[i + 1] = 1; d[i + 2] = 1;
+        } else {
+          d[i] = 255; d[i + 1] = 255; d[i + 2] = 255;
+        }
+        d[i + 3] = 255;
+      }
+      ctx.putImageData(imgData, 0, 0);
+    }
     document.getElementById('showQR').addEventListener('click', () => {
       document.getElementById('shareMain').style.display = 'none';
+      document.getElementById('socialShare').classList.remove('show');
       const qrEl = document.getElementById('qrcode');
-      qrEl.style.display = 'flex';
       qrEl.innerHTML = '';
+      qrcodeWrap.classList.add('visible');
       if (typeof QRCode !== 'undefined') {
-        new QRCode(qrEl, { text: window.location.href, width: 200, height: 200, colorDark: '#f40101', colorLight: '#ffffff' });
+        new QRCode(qrEl, {
+          text: SHARE_PAGE_URL,
+          width: 220,
+          height: 220,
+          colorDark: '#f40101',
+          colorLight: '#ffffff',
+          correctLevel: QRCode.CorrectLevel.M
+        });
+        qrEl.querySelectorAll('canvas').forEach(paintQrCanvas);
+        qrEl.querySelectorAll('img').forEach(function(img) {
+          var c = qrEl.querySelector('canvas');
+          if (c) img.src = c.toDataURL('image/png');
+        });
       }
     });
     document.getElementById('showSocial').addEventListener('click', () => {
       document.getElementById('shareMain').style.display = 'none';
-      document.getElementById('qrcode').style.display = 'none';
+      qrcodeWrap.classList.remove('visible');
       document.getElementById('socialShare').classList.add('show');
     });
-    document.getElementById('shareWA').href = `https://wa.me/?text=${pageTitle}%20${pageUrl}`;
-    document.getElementById('shareFB').href = `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`;
-    document.getElementById('shareLI').href = `https://www.linkedin.com/sharing/share-offsite/?url=${pageUrl}`;
-    document.getElementById('shareTW').href = `https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`;
+    document.getElementById('shareWA').href = `https://wa.me/?text=${pageTitleEnc}%0A%0A${pageTextEnc}%0A%0A${pageUrlEnc}`;
+    document.getElementById('shareFB').href = `https://www.facebook.com/sharer/sharer.php?u=${pageUrlEnc}`;
+    document.getElementById('shareLI').href = `https://www.linkedin.com/sharing/share-offsite/?url=${pageUrlEnc}`;
+    document.getElementById('shareTW').href = `https://twitter.com/intent/tweet?url=${pageUrlEnc}&text=${pageTitleEnc}`;
   })();
   </script>
 </body>
