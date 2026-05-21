@@ -9,24 +9,24 @@
   <meta name="keywords" content="electrical contractor Kozhikode, electrical engineering Kerala, panel upgrade, HT metering, Future Tech Associates">
   <meta name="theme-color" content="#f40101">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="" id="canonicalUrl">
-  <link rel="icon" href="logo.png" type="image/png" sizes="any" id="favicon">
-  <link rel="apple-touch-icon" href="logo.png" id="appleTouchIcon">
+  <link rel="canonical" href="https://auxxweb.github.io/futuretech/" id="canonicalUrl">
+  <link rel="icon" href="https://auxxweb.github.io/futuretech/logo.png" type="image/png" sizes="any" id="favicon">
+  <link rel="apple-touch-icon" href="https://auxxweb.github.io/futuretech/logo.png" id="appleTouchIcon">
   <!-- Deploy: set your live URL in futuretech-public-url for best link previews (e.g. https://www.yoursite.com/) -->
-  <meta name="futuretech-public-url" content="">
+  <meta name="futuretech-public-url" content="https://auxxweb.github.io/futuretech/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Future Tech Associates">
   <meta property="og:title" content="Future Tech Associates | Electrical Contracting &amp; Engineering">
   <meta property="og:description" content="Premier electrical contracting, engineering &amp; consulting in Kozhikode, Kerala. Safe, reliable power solutions for homes, businesses &amp; industry.">
-  <meta property="og:url" content="" id="ogUrl">
-  <meta property="og:image" content="logo.png" id="ogImage">
+  <meta property="og:url" content="https://auxxweb.github.io/futuretech/" id="ogUrl">
+  <meta property="og:image" content="https://auxxweb.github.io/futuretech/logo.png" id="ogImage">
   <meta property="og:image:alt" content="Future Tech Associates — electrical contracting Kozhikode">
   <meta property="og:image:type" content="image/png">
   <meta property="og:locale" content="en_IN">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Future Tech Associates | Electrical Contracting Kozhikode">
   <meta name="twitter:description" content="Electrical installations, panel upgrades, HT metering &amp; consulting in Kerala. WhatsApp +91 7012394124.">
-  <meta name="twitter:image" content="logo.png" id="twitterImage">
+  <meta name="twitter:image" content="https://auxxweb.github.io/futuretech/logo.png" id="twitterImage">
   <meta name="twitter:image:alt" content="Future Tech Associates logo">
   <script>
   (function() {
@@ -35,8 +35,7 @@
     var base, pageUrl;
     if (custom) {
       base = custom;
-      var path = (location.pathname || '/index.html').replace(/^\//, '');
-      pageUrl = custom.replace(/\/?$/, '') + (path ? '/' + path : '');
+      pageUrl = custom.replace(/\/?$/, '/');
     } else if (location.protocol !== 'file:' && location.origin) {
       var p = location.pathname || '/';
       var dir = p.endsWith('/') ? p : p.substring(0, p.lastIndexOf('/') + 1) || '/';
@@ -59,7 +58,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <style>
     :root {
       --primary: #f40101;
@@ -577,21 +575,36 @@
     .social-btn.tw { background: #000; }
     .qrcode-wrap {
       display: none; flex-direction: column; align-items: center;
-      margin: 1rem auto; padding: 1.25rem;
-      background: #ffffff; border-radius: var(--radius);
-      border: 3px solid var(--primary); max-width: 280px;
-      box-shadow: 0 4px 20px rgba(244,1,1,0.12);
+      margin: 1rem auto; padding: 1.5rem 1.25rem;
+      background: #000000; border-radius: var(--radius);
+      border: 2px solid var(--primary); max-width: 300px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.35);
     }
     .qrcode-wrap.visible { display: flex; }
-    .qrcode-wrap p {
-      font-family: 'Poppins', sans-serif; font-size: 0.85rem;
-      color: var(--text-muted); margin-bottom: 0.75rem; text-align: center;
+    .qrcode-wrap .qrcode-label {
+      font-family: 'Poppins', sans-serif; font-size: 0.9rem;
+      color: #ffffff; margin-bottom: 1rem; text-align: center; font-weight: 500;
     }
-    #qrcode { display: flex; justify-content: center; line-height: 0; }
-    #qrcode img, #qrcode canvas {
-      display: block !important; margin: 0 auto;
-      border-radius: 4px;
+    #qrcode { display: flex; justify-content: center; align-items: center; min-height: 220px; min-width: 220px; }
+    #qrcode img {
+      display: block; width: 220px; height: 220px;
+      border-radius: 6px; background: #000;
     }
+    .qrcode-url {
+      margin-top: 1rem; font-family: 'Inter', sans-serif;
+      font-size: 0.75rem; color: var(--primary); text-align: center;
+      word-break: break-all; line-height: 1.4; max-width: 100%;
+    }
+    .qrcode-download {
+      margin-top: 1rem; width: 100%;
+      min-height: 44px; padding: 0.75rem 1rem;
+      font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 0.9rem;
+      color: #fff; background: var(--primary); border: none;
+      border-radius: 50px; cursor: pointer;
+      transition: background var(--transition), transform var(--transition);
+    }
+    .qrcode-download:hover { background: var(--secondary); transform: translateY(-1px); }
+    .qrcode-download:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
     /* Footer */
     footer {
       background: var(--footer-bg); color: rgba(255,255,255,0.85);
@@ -972,8 +985,10 @@
         <div class="share-card" id="showSocial" tabindex="0" role="button" aria-label="Share on social media"><div class="share-card-icon">📤</div><span>Share on Social</span></div>
       </div>
       <div class="qrcode-wrap" id="qrcodeWrap">
-        <p>Scan to open our website</p>
-        <div id="qrcode"></div>
+        <p class="qrcode-label">Scan to open our website</p>
+        <div id="qrcode" aria-live="polite"></div>
+        <p class="qrcode-url" id="qrcodeUrl">https://auxxweb.github.io/futuretech/</p>
+        <button type="button" class="qrcode-download" id="qrcodeDownload" disabled aria-label="Download QR code as PNG">Download QR Code</button>
       </div>
       <div class="social-share" id="socialShare">
         <a class="social-btn wa" id="shareWA" target="_blank" rel="noopener">WhatsApp</a>
@@ -987,7 +1002,7 @@
   (function() {
     'use strict';
     const TAGLINE = 'We specialize in delivering cutting-edge electrical solutions tailored to your needs, ensuring safety, efficiency, and reliability.';
-    let qrGenerated = false;
+    const SITE_URL = 'https://auxxweb.github.io/futuretech/';
 
     /* Loader */
     setTimeout(() => {
@@ -1224,7 +1239,7 @@
     /* Share modal */
     const shareModal = document.getElementById('shareModal');
     const qrcodeWrap = document.getElementById('qrcodeWrap');
-    const SHARE_PAGE_URL = window.location.href.split('#')[0];
+    const SHARE_PAGE_URL = SITE_URL;
     const SHARE_TITLE = 'Future Tech Associates — Electrical Contracting, Kozhikode';
     const SHARE_TEXT = 'Premier electrical contracting & engineering in Kerala. Installations, panel upgrades & HT metering.';
     const pageUrlEnc = encodeURIComponent(SHARE_PAGE_URL);
@@ -1239,52 +1254,76 @@
     document.getElementById('shareModalClose').addEventListener('click', () => shareModal.classList.remove('open'));
     shareModal.addEventListener('click', e => { if (e.target === shareModal) shareModal.classList.remove('open'); });
     document.getElementById('copyLink').addEventListener('click', () => {
-      navigator.clipboard.writeText(window.location.href).then(() => {
+      navigator.clipboard.writeText(SITE_URL).then(() => {
         showToast('Link Copied!');
         shareModal.classList.remove('open');
       });
     });
-    function paintQrCanvas(canvas) {
-      if (!canvas || !canvas.getContext) return;
-      var ctx = canvas.getContext('2d');
-      var w = canvas.width, h = canvas.height;
-      var imgData = ctx.getImageData(0, 0, w, h);
-      var d = imgData.data;
-      for (var i = 0; i < d.length; i += 4) {
-        if (d[i] < 128) {
-          d[i] = 244; d[i + 1] = 1; d[i + 2] = 1;
-        } else {
-          d[i] = 255; d[i + 1] = 255; d[i + 2] = 255;
-        }
-        d[i + 3] = 255;
-      }
-      ctx.putImageData(imgData, 0, 0);
+    function buildQrImage() {
+      const params = new URLSearchParams({
+        size: '240x240',
+        data: SITE_URL,
+        color: 'f40101',
+        bgcolor: '000000',
+        margin: '12',
+        format: 'png'
+      });
+      return 'https://api.qrserver.com/v1/create-qr-code/?' + params.toString();
     }
+    const qrcodeDownloadBtn = document.getElementById('qrcodeDownload');
+    let currentQrImageUrl = '';
+    async function downloadQrCode() {
+      if (!currentQrImageUrl) return;
+      qrcodeDownloadBtn.disabled = true;
+      qrcodeDownloadBtn.textContent = 'Downloading…';
+      try {
+        const res = await fetch(currentQrImageUrl);
+        const blob = await res.blob();
+        const blobUrl = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = blobUrl;
+        a.download = 'future-tech-associates-qrcode.png';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(blobUrl);
+        showToast('QR code downloaded!');
+      } catch (err) {
+        window.open(currentQrImageUrl, '_blank', 'noopener');
+        showToast('Save the image from the new tab.');
+      }
+      qrcodeDownloadBtn.disabled = false;
+      qrcodeDownloadBtn.textContent = 'Download QR Code';
+    }
+    qrcodeDownloadBtn.addEventListener('click', downloadQrCode);
     document.getElementById('showQR').addEventListener('click', () => {
       document.getElementById('shareMain').style.display = 'none';
       document.getElementById('socialShare').classList.remove('show');
       const qrEl = document.getElementById('qrcode');
       qrEl.innerHTML = '';
       qrcodeWrap.classList.add('visible');
-      if (typeof QRCode !== 'undefined') {
-        new QRCode(qrEl, {
-          text: SHARE_PAGE_URL,
-          width: 220,
-          height: 220,
-          colorDark: '#f40101',
-          colorLight: '#ffffff',
-          correctLevel: QRCode.CorrectLevel.M
-        });
-        qrEl.querySelectorAll('canvas').forEach(paintQrCanvas);
-        qrEl.querySelectorAll('img').forEach(function(img) {
-          var c = qrEl.querySelector('canvas');
-          if (c) img.src = c.toDataURL('image/png');
-        });
-      }
+      currentQrImageUrl = buildQrImage();
+      qrcodeDownloadBtn.disabled = true;
+      const img = document.createElement('img');
+      img.src = currentQrImageUrl;
+      img.alt = 'QR code — Future Tech Associates website';
+      img.width = 220;
+      img.height = 220;
+      img.loading = 'eager';
+      img.onload = function() { qrcodeDownloadBtn.disabled = false; };
+      img.onerror = function() {
+        currentQrImageUrl = '';
+        qrEl.innerHTML = '<p style="color:#f40101;font-size:0.85rem;text-align:center;padding:1rem;">QR could not load. Visit:<br>' + SITE_URL + '</p>';
+        qrcodeDownloadBtn.disabled = true;
+      };
+      qrEl.appendChild(img);
+      document.getElementById('qrcodeUrl').textContent = SITE_URL;
     });
     document.getElementById('showSocial').addEventListener('click', () => {
       document.getElementById('shareMain').style.display = 'none';
       qrcodeWrap.classList.remove('visible');
+      currentQrImageUrl = '';
+      qrcodeDownloadBtn.disabled = true;
       document.getElementById('socialShare').classList.add('show');
     });
     document.getElementById('shareWA').href = `https://wa.me/?text=${pageTitleEnc}%0A%0A${pageTextEnc}%0A%0A${pageUrlEnc}`;
