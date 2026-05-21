@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Future Tech Associates — premier electrical contracting, engineering, and consulting services in Kozhikode, Kerala.">
+  <meta name="theme-color" content="#f40101">
+  <meta property="og:title" content="Future Tech Associates">
+  <meta property="og:image" content="logo.png">
+  <title>Future Tech Associates | Electrical Contracting & Engineering</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <style>
+    :root {
+      --primary: #f40101;
+      --secondary: #ef0101;
+      --gold: #c9a227;
+      --dark-red: #8b0000;
+      --bg: #ffffff;
+      --bg-light: #f9f9f9;
+      --text: #1a1a1a;
+      --text-muted: #555;
+      --footer-bg: #1a1a1a;
+      --shadow: 0 4px 24px rgba(0,0,0,0.08);
+      --shadow-lg: 0 12px 40px rgba(244,1,1,0.15);
+      --radius: 12px;
+      --nav-h: 80px;
+      --nav-h-compact: 64px;
+      --transition: 0.3s ease;
+      --container: min(1200px, 92vw);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    h1,h2,h3,h4,h5,h6 { font-family: 'Poppins', sans-serif; font-weight: 600; }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; }
+    .container { width: var(--container); margin: 0 auto; }
+    .section { padding: 5rem 0; }
+    .section-alt { background: var(--bg-light); }
+    .section-header { text-align: center; margin-bottom: 3rem; }
+    .section-header h2 {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      color: var(--text);
+      position: relative;
+      display: inline-block;
+      padding-bottom: 0.5rem;
+    }
+    .section-header h2::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%);
+      height: 4px;
+      width: 0;
+      background: linear-gradient(90deg, var(--primary), var(--gold));
+      border-radius: 2px;
+      transition: width 0.8s ease;
+    }
+    .section-header.visible h2::after { width: 60px; }
+    .section-header p { color: var(--text-muted); margin-top: 0.75rem; font-size: 1.05rem; }
+    .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-height: 44px; padding: 0.85rem 1.75rem;
+      font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 0.95rem;
+      border-radius: 50px; transition: var(--transition);
+    }
+    .btn-primary {
+      background: var(--primary); color: #fff;
+      box-shadow: 0 4px 20px rgba(244,1,1,0.35);
+    }
+    .btn-primary:hover { background: var(--secondary); transform: translateY(-2px); }
+    .btn-outline {
+      border: 2px solid #fff; color: #fff; background: transparent;
+    }
+    .btn-outline:hover { background: #fff; color: var(--primary); }
+    /* Loader */
+    #loader {
+      position: fixed; inset: 0; z-index: 10000;
+      background: #fff; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      transition: opacity 0.6s ease, visibility 0.6s;
+    }
+    #loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+    .loader-ring-wrap { position: relative; width: 140px; height: 140px; display: flex; align-items: center; justify-content: center; }
+    .loader-ring {
+      position: absolute; inset: 0; border-radius: 50%;
+      border: 3px solid rgba(244,1,1,0.15);
+      border-top-color: var(--primary);
+      animation: spin 1.2s linear infinite, pulse-ring 1.5s ease-in-out infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes pulse-ring {
+      0%,100% { box-shadow: 0 0 0 0 rgba(244,1,1,0.4); }
+      50% { box-shadow: 0 0 0 12px rgba(244,1,1,0); }
+    }
+    .loader-logo { width: 90px; height: auto; position: relative; z-index: 1; }
+    .loader-progress {
+      position: absolute; bottom: 0; left: 0; height: 3px;
+      background: var(--primary); width: 0;
+      animation: load-bar 2.5s ease forwards;
+    }
+    @keyframes load-bar { to { width: 100%; } }
+    #main-content { opacity: 0; transition: opacity 0.8s ease 0.3s; }
+    #main-content.visible { opacity: 1; }
+    /* Navbar */
+    .navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: #fff; box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+      height: var(--nav-h); transition: height var(--transition), box-shadow var(--transition);
+    }
+    .navbar.compact { height: var(--nav-h-compact); }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 100%; width: var(--container); margin: 0 auto; padding: 0 4vw;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 0.75rem;
+      flex-shrink: 0; min-width: 0;
+    }
+    .nav-logo img { height: 48px; width: auto; flex-shrink: 0; transition: height var(--transition); }
+    .navbar.compact .nav-logo img { height: 40px; }
+    .nav-brand {
+      display: flex; flex-direction: column; line-height: 1.15;
+      min-width: 0;
+    }
+    .nav-brand-title {
+      font-family: 'Poppins', sans-serif; font-weight: 700;
+      font-size: clamp(0.95rem, 2.5vw, 1.15rem);
+      color: var(--primary); white-space: nowrap;
+    }
+    .nav-brand-sub {
+      font-family: 'Poppins', sans-serif; font-weight: 500;
+      font-size: clamp(0.65rem, 1.8vw, 0.78rem);
+      color: var(--text-muted); letter-spacing: 0.04em;
+      text-transform: uppercase; white-space: nowrap;
+    }
+    .navbar.compact .nav-brand-title { font-size: clamp(0.9rem, 2.5vw, 1.05rem); }
+    .navbar.compact .nav-brand-sub { font-size: clamp(0.6rem, 1.8vw, 0.72rem); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-family: 'Poppins', sans-serif; font-weight: 500; font-size: 0.95rem;
+      color: var(--text); position: relative; padding: 0.25rem 0;
+      transition: color var(--transition);
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -2px; left: 0;
+      width: 0; height: 2px; background: var(--primary);
+      transition: width var(--transition);
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--primary); }
+    .nav-links a.active::after, .nav-links a:hover::after { width: 100%; }
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      width: 44px; height: 44px; align-items: center; justify-content: center;
+    }
+    .hamburger span {
+      width: 26px; height: 2px; background: var(--text);
+      transition: var(--transition); display: block;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mobile-menu {
+      display: none; position: fixed; top: var(--nav-h); left: 0; right: 0;
+      background: #fff; box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+      padding: 1rem 0; z-index: 999;
+      transform: translateY(-10px); opacity: 0;
+      transition: transform 0.35s ease, opacity 0.35s ease;
+    }
+    .navbar.compact + .mobile-menu { top: var(--nav-h-compact); }
+    .mobile-menu.open {
+      display: block; transform: translateY(0); opacity: 1;
+    }
+    .mobile-menu a {
+      display: block; padding: 1rem 4vw; font-family: 'Poppins', sans-serif;
+      font-weight: 500; border-bottom: 1px solid #eee;
+    }
+    .mobile-menu a.active { color: var(--primary); background: rgba(244,1,1,0.05); }
+    /* Hero */
+    .hero {
+      min-height: 100vh; position: relative; display: flex;
+      align-items: center; justify-content: center; text-align: center;
+      padding: calc(var(--nav-h) + 2rem) 4vw 4rem;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: url('hero-banner.png') center/cover no-repeat;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(26,0,0,0.75) 0%, rgba(0,0,0,0.55) 100%);
+    }
+    .hero-particles { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+    .hero-content { position: relative; z-index: 2; max-width: 800px; }
+    .hero h1 {
+      font-size: clamp(2.5rem, 8vw, 4.5rem); color: #fff;
+      font-weight: 700; margin-bottom: 1rem;
+      text-shadow: 0 4px 30px rgba(0,0,0,0.3);
+    }
+    .hero-tagline {
+      font-size: clamp(1rem, 2.5vw, 1.25rem); color: rgba(255,255,255,0.95);
+      margin-bottom: 2rem; min-height: 3.5em;
+    }
+    .hero-tagline .cursor { display: inline-block; width: 2px; height: 1em;
+      background: var(--primary); margin-left: 2px; animation: blink 0.8s infinite; vertical-align: text-bottom;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+    .hero-cta { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
+    /* About */
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
+      align-items: center;
+    }
+    .about-img { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-lg); }
+    .about-img img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 4/3; }
+    .about-text {
+      border-left: 4px solid var(--primary); padding-left: 1.5rem;
+    }
+    .about-text h2 { font-size: clamp(1.5rem, 3vw, 2rem); margin-bottom: 1rem; color: var(--primary); }
+    .about-text p { color: var(--text-muted); margin-bottom: 1rem; }
+    .stats-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-top: 2rem;
+    }
+    .stat-item {
+      background: var(--bg-light); padding: 1.25rem; border-radius: var(--radius);
+      text-align: center; border: 1px solid rgba(244,1,1,0.1);
+    }
+    .stat-num { font-family: 'Poppins', sans-serif; font-size: 2rem; font-weight: 700; color: var(--primary); }
+    .stat-label { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem; }
+    /* Services */
+    .services-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.75rem;
+    }
+    .services-grid .service-card:nth-child(5):last-child {
+      grid-column: 2;
+    }
+    @media (max-width: 1024px) {
+      .services-grid .service-card:nth-child(5):last-child { grid-column: auto; }
+    }
+    .service-card {
+      background: #fff; border-radius: var(--radius); overflow: hidden;
+      box-shadow: var(--shadow); transition: transform var(--transition), box-shadow var(--transition);
+      border-top: 3px solid transparent;
+    }
+    .service-card:hover {
+      transform: translateY(-6px); border-top-color: var(--primary);
+      box-shadow: var(--shadow-lg);
+    }
+    .service-card-img { aspect-ratio: 16/9; overflow: hidden; }
+    .service-card-img img { width: 100%; height: 100%; object-fit: cover; }
+    .service-card-body { padding: 1.5rem; }
+    .service-card-body h3 { font-size: 1.15rem; margin-bottom: 0.75rem; }
+    .service-card-body p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem; }
+    .service-card .btn-primary { width: 100%; font-size: 0.85rem; padding: 0.7rem; }
+    /* Projects */
+    .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.75rem; }
+    .project-card {
+      position: relative; border-radius: var(--radius); overflow: hidden;
+      aspect-ratio: 4/3; cursor: pointer;
+    }
+    .project-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+    .project-card:hover img { transform: scale(1.08); }
+    .project-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 60%);
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 1.5rem; color: #fff;
+    }
+    .project-info {
+      transform: translateY(20px); opacity: 0.9;
+      transition: transform 0.4s ease;
+    }
+    .project-card:hover .project-info { transform: translateY(0); }
+    .project-info h3 { font-size: 1.25rem; margin-bottom: 0.25rem; }
+    .project-info p { font-size: 0.9rem; opacity: 0.9; margin-bottom: 0.75rem; }
+    .project-card .btn-outline { font-size: 0.8rem; padding: 0.5rem 1rem; min-height: 36px; }
+    /* Portfolio */
+    .masonry {
+      column-count: 3; column-gap: 1.5rem;
+    }
+    .masonry-item {
+      break-inside: avoid; margin-bottom: 1.5rem;
+      border-radius: var(--radius); overflow: hidden;
+      box-shadow: var(--shadow); background: #fff;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .masonry-item:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+    .masonry-item img { width: 100%; object-fit: cover; }
+    .masonry-item-content { padding: 1.25rem; }
+    .masonry-item-content h3 { font-size: 1rem; margin-bottom: 0.5rem; }
+    .masonry-item-content p { font-size: 0.85rem; color: var(--text-muted); }
+    /* Gallery carousel */
+    .gallery-carousel { position: relative; max-width: 100%; }
+    .gallery-viewport {
+      position: relative; overflow: hidden; border-radius: var(--radius);
+      box-shadow: var(--shadow-lg); background: var(--bg-light);
+    }
+    .gallery-track {
+      display: flex; will-change: transform;
+      transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .gallery-slide {
+      flex: 0 0 100%; min-width: 100%; position: relative;
+      aspect-ratio: 16/9; overflow: hidden; cursor: pointer;
+    }
+    .gallery-slide img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      -webkit-tap-highlight-color: transparent;
+    }
+    /* Gallery lightbox (full screen, mobile-friendly) */
+    .lightbox {
+      position: fixed; inset: 0; z-index: 2500;
+      background: rgba(0,0,0,0.95);
+      display: none; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+      opacity: 0; transition: opacity 0.3s ease;
+      touch-action: pan-y pinch-zoom;
+    }
+    .lightbox.open { display: flex; opacity: 1; }
+    .lightbox-inner {
+      flex: 1; width: 100%; display: flex;
+      align-items: center; justify-content: center;
+      position: relative; min-height: 0; padding: 3.5rem 0.5rem 1rem;
+    }
+    .lightbox-img-wrap {
+      width: 100%; height: 100%; max-height: 100%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .lightbox-img-wrap img {
+      max-width: 100%; max-height: min(92dvh, 92vh);
+      width: auto; height: auto;
+      object-fit: contain; display: block;
+      user-select: none; -webkit-user-drag: none;
+    }
+    .lightbox-caption {
+      flex-shrink: 0; width: 100%; max-width: 100%;
+      padding: 0.75rem 1rem 1.25rem; text-align: center;
+      color: #fff; font-family: 'Poppins', sans-serif;
+      font-size: clamp(0.85rem, 3vw, 1rem); line-height: 1.4;
+    }
+    .lightbox-close {
+      position: absolute; top: max(0.75rem, env(safe-area-inset-top));
+      right: max(0.75rem, env(safe-area-inset-right));
+      z-index: 3; width: 48px; height: 48px; min-width: 44px; min-height: 44px;
+      border: none; border-radius: 50%;
+      background: rgba(255,255,255,0.15); color: #fff;
+      font-size: 2rem; line-height: 1;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .lightbox-close:hover { background: var(--primary); }
+    .lightbox-nav {
+      position: absolute; top: 50%; transform: translateY(-50%); z-index: 3;
+      width: 48px; height: 48px; min-width: 44px; min-height: 44px;
+      border: none; border-radius: 50%;
+      background: rgba(255,255,255,0.15); color: #fff;
+      font-size: 2rem; line-height: 1;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .lightbox-nav:hover { background: var(--primary); }
+    .lightbox-nav:disabled { opacity: 0.25; pointer-events: none; }
+    .lightbox-prev { left: max(0.5rem, env(safe-area-inset-left)); }
+    .lightbox-next { right: max(0.5rem, env(safe-area-inset-right)); }
+    @media (max-width: 480px) {
+      .lightbox-inner { padding: 3rem 0.25rem 0.5rem; }
+      .lightbox-nav { width: 44px; height: 44px; font-size: 1.75rem; }
+      .lightbox-prev { left: 0.25rem; }
+      .lightbox-next { right: 0.25rem; }
+    }
+    .gallery-slide-caption {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 1rem 1.25rem;
+      background: linear-gradient(transparent, rgba(0,0,0,0.75));
+      color: #fff; font-family: 'Poppins', sans-serif;
+      font-size: 0.9rem; font-weight: 500;
+    }
+    .gallery-arrow {
+      position: absolute; top: 50%; transform: translateY(-50%); z-index: 2;
+      width: 48px; height: 48px; min-width: 44px; min-height: 44px;
+      border-radius: 50%; border: none;
+      background: rgba(255,255,255,0.92); color: var(--primary);
+      font-size: 1.75rem; line-height: 1; box-shadow: var(--shadow);
+      display: flex; align-items: center; justify-content: center;
+      transition: background var(--transition), transform var(--transition);
+    }
+    .gallery-arrow:hover { background: var(--primary); color: #fff; transform: translateY(-50%) scale(1.08); }
+    .gallery-arrow:disabled { opacity: 0.35; cursor: not-allowed; pointer-events: none; }
+    .gallery-prev { left: 0.75rem; }
+    .gallery-next { right: 0.75rem; }
+    .gallery-nav-dots {
+      display: flex; justify-content: center; align-items: center;
+      gap: 0.75rem; margin-top: 1.25rem;
+    }
+    .gallery-nav-dots .gallery-dot-btn {
+      width: 44px; height: 44px; padding: 0; border: none; background: transparent;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+    }
+    .gallery-nav-dots .gallery-dot-btn::after {
+      content: ''; border-radius: 50%; background: #ccc;
+      transition: background var(--transition), transform var(--transition), width var(--transition), height var(--transition);
+    }
+    .gallery-nav-dots .gallery-dot-side::after { width: 8px; height: 8px; }
+    .gallery-nav-dots .gallery-dot-center::after { width: 12px; height: 12px; background: var(--primary); }
+    .gallery-nav-dots .gallery-dot-side:hover:not(:disabled)::after,
+    .gallery-nav-dots .gallery-dot-side:focus-visible::after {
+      background: var(--secondary); transform: scale(1.2);
+    }
+    .gallery-nav-dots .gallery-dot-side:disabled { cursor: default; opacity: 0.4; }
+    .gallery-nav-dots .gallery-dot-center { cursor: default; pointer-events: none; }
+    /* Contact */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+    .contact-form { background: #fff; padding: 2rem; border-radius: var(--radius); box-shadow: var(--shadow); }
+    .form-group { position: relative; margin-bottom: 1.5rem; }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%; padding: 1rem 0.75rem 0.5rem; border: 1px solid #ddd;
+      border-radius: 8px; font-family: inherit; font-size: 1rem;
+      background: transparent; transition: border-color var(--transition);
+    }
+    .form-group textarea { min-height: 120px; resize: vertical; }
+    .form-group label {
+      position: absolute; left: 0.75rem; top: 1rem;
+      color: var(--text-muted); font-size: 0.95rem;
+      pointer-events: none; transition: all 0.25s ease;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus,
+    .form-group input:not(:placeholder-shown), .form-group textarea:not(:placeholder-shown),
+    .form-group select:valid { border-color: var(--primary); outline: none; }
+    .form-group input:focus + label, .form-group input:not(:placeholder-shown) + label,
+    .form-group textarea:focus + label, .form-group textarea:not(:placeholder-shown) + label,
+    .form-group select:focus + label, .form-group.filled label {
+      top: 0.25rem; font-size: 0.75rem; color: var(--primary);
+    }
+    .form-group select { padding-top: 1.25rem; }
+    .contact-info { padding: 1rem 0; }
+    .contact-info h3 { font-size: 1.5rem; margin-bottom: 1.5rem; }
+    .info-item {
+      display: flex; gap: 1rem; margin-bottom: 1.25rem; align-items: flex-start;
+    }
+    .info-icon {
+      width: 44px; height: 44px; min-width: 44px;
+      background: rgba(244,1,1,0.1); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--primary); font-size: 1.1rem;
+    }
+    .info-item a { color: var(--primary); font-weight: 500; }
+    .info-item a:hover { text-decoration: underline; }
+    .map-wrap {
+      margin-top: 1.5rem; border-radius: var(--radius); overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    .map-wrap iframe { width: 100%; height: 220px; border: 0; display: block; }
+    /* FAB */
+    .fab-group {
+      position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 900;
+      display: flex; flex-direction: column; gap: 0.75rem;
+    }
+    .fab {
+      width: 52px; height: 52px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      transition: transform var(--transition);
+      opacity: 0; transform: scale(0);
+      animation: fab-pop 0.4s ease forwards;
+    }
+    .fab-call { animation-delay: 2.8s; background: #25d366; }
+    .fab-wa-btn { animation-delay: 3s; background: #25d366; }
+    .fab-share { animation-delay: 3.2s; background: #1877f2; }
+    @keyframes fab-pop { to { opacity: 1; transform: scale(1); } }
+    .fab:hover { transform: scale(1.1); }
+    .fab-wa-btn { animation: fab-pop 0.4s ease forwards, pulse-wa 2s ease-in-out infinite 3.5s; }
+    @keyframes pulse-wa {
+      0%,100% { box-shadow: 0 4px 20px rgba(37,211,102,0.4); }
+      50% { box-shadow: 0 4px 30px rgba(37,211,102,0.8), 0 0 0 8px rgba(37,211,102,0.15); }
+    }
+    .fab svg { width: 26px; height: 26px; fill: #fff; }
+    /* Modals */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 3000;
+      background: rgba(0,0,0,0.5); display: none;
+      align-items: center; justify-content: center; padding: 1rem;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: #fff; border-radius: var(--radius); padding: 2rem;
+      max-width: 480px; width: 100%; position: relative;
+      transform: scale(0.9); opacity: 0;
+      transition: transform 0.35s ease, opacity 0.35s ease;
+    }
+    .modal-overlay.open .modal { transform: scale(1); opacity: 1; }
+    .modal-close {
+      position: absolute; top: 1rem; right: 1rem;
+      font-size: 1.5rem; width: 44px; height: 44px;
+      color: var(--text-muted);
+    }
+    .modal h3 { text-align: center; margin-bottom: 1.5rem; font-size: 1.35rem; }
+    .share-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .share-card {
+      text-align: center; padding: 1.25rem 0.75rem;
+      border: 1px solid #eee; border-radius: var(--radius);
+      cursor: pointer; transition: var(--transition);
+    }
+    .share-card:hover { border-color: var(--primary); background: rgba(244,1,1,0.04); }
+    .share-card-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+    .share-card span { font-size: 0.8rem; font-weight: 500; display: block; }
+    .social-share { display: none; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; margin-top: 1rem; }
+    .social-share.show { display: grid; }
+    .social-btn {
+      display: flex; align-items: center; gap: 0.5rem;
+      padding: 0.75rem; border-radius: 8px; color: #fff;
+      font-size: 0.85rem; font-weight: 500; min-height: 44px;
+    }
+    .social-btn.wa { background: #25d366; }
+    .social-btn.fb { background: #1877f2; }
+    .social-btn.li { background: #0a66c2; }
+    .social-btn.tw { background: #000; }
+    #qrcode { display: flex; justify-content: center; margin: 1rem 0; }
+    #qrcode img { margin: 0 auto; }
+    /* Footer */
+    footer {
+      background: var(--footer-bg); color: rgba(255,255,255,0.85);
+      padding: 3rem 0 1.5rem; border-top: 4px solid var(--primary);
+    }
+    .footer-top { text-align: center; margin-bottom: 2.5rem; }
+    .footer-top img { height: 60px; margin: 0 auto 0.75rem; }
+    .footer-top h3 { color: #fff; font-size: 1.25rem; }
+    .footer-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+      width: var(--container); margin: 0 auto 2rem; padding: 0 4vw;
+    }
+    .footer-col h4 { color: #fff; margin-bottom: 1rem; font-size: 1rem; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 0.5rem; }
+    .footer-col a { color: rgba(255,255,255,0.7); font-size: 0.9rem; transition: color var(--transition); }
+    .footer-col a:hover { color: var(--primary); }
+    .social-row {
+      display: flex; justify-content: center; gap: 1rem; margin-bottom: 1.5rem;
+    }
+    .social-row a {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      display: flex; align-items: center; justify-content: center;
+      transition: background var(--transition);
+    }
+    .social-row a:hover { background: var(--primary); }
+    .social-row svg { width: 20px; height: 20px; fill: #fff; }
+    .footer-bottom {
+      text-align: center; padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.85rem; color: rgba(255,255,255,0.5);
+    }
+    /* Scroll top */
+    .scroll-top {
+      position: fixed; bottom: 1.5rem; left: 1.5rem; z-index: 899;
+      width: 48px; height: 48px; border-radius: 50%;
+      background: var(--primary); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: var(--shadow-lg); opacity: 0; visibility: hidden;
+      transition: var(--transition);
+    }
+    .scroll-top.visible { opacity: 1; visibility: visible; }
+    .scroll-top:hover { background: var(--secondary); transform: translateY(-3px); }
+    /* Toast */
+    .toast {
+      position: fixed; bottom: 6rem; left: 50%; transform: translateX(-50%) translateY(100px);
+      background: var(--text); color: #fff; padding: 1rem 1.75rem;
+      border-radius: 50px; z-index: 5000; font-size: 0.95rem;
+      box-shadow: var(--shadow-lg); opacity: 0;
+      transition: transform 0.4s ease, opacity 0.4s ease;
+      pointer-events: none;
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+    /* Responsive */
+    @media (max-width: 1280px) {
+      .services-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 1024px) {
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .projects-grid { grid-template-columns: repeat(2, 1fr); }
+      .masonry { column-count: 2; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; }
+      .about-img { order: -1; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .services-grid, .projects-grid { grid-template-columns: 1fr; }
+      .masonry { column-count: 1; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr; text-align: center; }
+      .fab-group { bottom: 1rem; right: 1rem; }
+      .scroll-top { left: 1rem; bottom: 1rem; }
+    }
+    @media (max-width: 480px) {
+      .section { padding: 3.5rem 0; }
+      .hero-cta { flex-direction: column; }
+      .hero-cta .btn { width: 100%; }
+      .share-options { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      .nav-logo { gap: 0.5rem; }
+      .nav-brand-sub { display: none; }
+    }
+    @media (max-width: 320px) {
+      .nav-logo img { height: 36px; }
+      .nav-brand-title { font-size: 0.85rem; }
+      .stat-num { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <div id="loader" role="status" aria-label="Loading">
+    <div class="loader-ring-wrap">
+      <div class="loader-ring" aria-hidden="true"></div>
+      <img class="loader-logo" src="logo.png" alt="Future Tech Associates logo">
+    </div>
+    <div class="loader-progress" aria-hidden="true"></div>
+  </div>
+
+  <div id="main-content">
+    <header>
+      <nav class="navbar" id="navbar" aria-label="Main navigation">
+        <div class="nav-inner">
+          <a href="#home" class="nav-logo" aria-label="Future Tech Associates home">
+            <img src="logo.png" alt="">
+            <span class="nav-brand">
+              <span class="nav-brand-title">Future Tech</span>
+              <span class="nav-brand-sub">Associates</span>
+            </span>
+          </a>
+          <ul class="nav-links" role="list">
+            <li><a href="#home" class="active" data-section="home">Home</a></li>
+            <li><a href="#about" data-section="about">About</a></li>
+            <li><a href="#services" data-section="services">Services</a></li>
+            <li><a href="#projects" data-section="projects">Projects</a></li>
+            <li><a href="#gallery" data-section="gallery">Gallery</a></li>
+            <li><a href="#contact" data-section="contact">Contact</a></li>
+          </ul>
+          <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </nav>
+      <div class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
+        <a href="#home" class="active" data-section="home">Home</a>
+        <a href="#about" data-section="about">About</a>
+        <a href="#services" data-section="services">Services</a>
+        <a href="#projects" data-section="projects">Projects</a>
+        <a href="#gallery" data-section="gallery">Gallery</a>
+        <a href="#contact" data-section="contact">Contact</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" id="home" aria-label="Hero">
+        <div class="hero-bg" aria-hidden="true"></div>
+        <div class="hero-overlay" aria-hidden="true"></div>
+        <div class="hero-particles" id="heroParticles" aria-hidden="true"></div>
+        <div class="hero-content fade-in">
+          <h1>Future Tech</h1>
+          <p class="hero-tagline"><span id="typewriter"></span><span class="cursor" aria-hidden="true"></span></p>
+          <div class="hero-cta">
+            <a href="https://wa.me/917012394124" class="btn btn-primary" target="_blank" rel="noopener" aria-label="Get a quote on WhatsApp">Get a Quote</a>
+            <a href="#services" class="btn btn-outline" aria-label="View our services">Our Services</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="about" aria-label="About us">
+        <div class="container">
+          <div class="section-header fade-in"><h2>About Us</h2></div>
+          <div class="about-grid">
+            <div class="about-img fade-in">
+              <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&amp;fit=crop&amp;w=800&amp;h=600&amp;q=80" alt="Licensed electrician at work" loading="lazy">
+            </div>
+            <div class="about-text fade-in">
+              <h2>We are FUTURE TECH ASSOCIATES</h2>
+              <p>Your trusted partner for reliable and efficient electrical solutions. As an electrical contractor based in Kerala, we take pride in offering a diverse range of services tailored to meet the electrical needs of our clients.</p>
+              <p>We are a premier provider of electrical contracting, engineering, and consulting services, dedicated to powering progress and innovation across industries.</p>
+              <div class="stats-grid">
+                <div class="stat-item"><div class="stat-num" data-target="10" data-suffix="+">0</div><div class="stat-label">Years Experience</div></div>
+                <div class="stat-item"><div class="stat-num" data-target="200" data-suffix="+">0</div><div class="stat-label">Projects Completed</div></div>
+                <div class="stat-item"><div class="stat-num" data-target="50" data-suffix="+">0</div><div class="stat-label">Clients Served</div></div>
+                <div class="stat-item"><div class="stat-num" data-target="5" data-suffix="★">0</div><div class="stat-label">Rating</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section section-alt" id="services" aria-label="Our services">
+        <div class="container">
+          <div class="section-header fade-in"><h2>Our Services</h2><p>We offer services like . .</p></div>
+          <div class="services-grid">
+            <article class="service-card fade-in" data-delay="0">
+              <div class="service-card-img"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&amp;h=450&amp;fit=crop&amp;q=80" alt="Electrical installation work" loading="lazy"></div>
+              <div class="service-card-body"><h3>Electrical Installations</h3><p>Professional and efficient electrical installation services, ensuring safe, reliable, and customized solutions for residential, commercial, and industrial needs.</p>
+                <a href="https://wa.me/917012394124?text=Hi,%20I'm%20interested%20in%20Electrical%20Installations" class="btn btn-primary" target="_blank" rel="noopener">Enquire Now</a></div>
+            </article>
+            <article class="service-card fade-in" data-delay="1">
+              <div class="service-card-img"><img src="repairs-maintenance.png" alt="Electrician performing repairs and maintenance on electrical panel" loading="lazy"></div>
+              <div class="service-card-body"><h3>Repairs and Maintenance</h3><p>Comprehensive repair and maintenance services to ensure optimal performance, safety, and longevity of your electrical systems and equipment.</p>
+                <a href="https://wa.me/917012394124?text=Hi,%20I'm%20interested%20in%20Repairs%20and%20Maintenance" class="btn btn-primary" target="_blank" rel="noopener">Enquire Now</a></div>
+            </article>
+            <article class="service-card fade-in" data-delay="2">
+              <div class="service-card-img"><img src="panel-upgrades.png" alt="Technician upgrading electrical control panel" loading="lazy"></div>
+              <div class="service-card-body"><h3>Panel Upgrades</h3><p>Expert panel upgrade services to enhance electrical capacity, improve safety, and meet modern energy demands for your home or business.</p>
+                <a href="https://wa.me/917012394124?text=Hi,%20I'm%20interested%20in%20Panel%20Upgrades" class="btn btn-primary" target="_blank" rel="noopener">Enquire Now</a></div>
+            </article>
+            <article class="service-card fade-in" data-delay="3">
+              <div class="service-card-img"><img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&amp;fit=crop&amp;w=800&amp;h=450&amp;q=80" alt="Electrical safety inspection" loading="lazy"></div>
+              <div class="service-card-body"><h3>Electrical Inspections</h3><p>Thorough electrical inspections to ensure system safety, compliance with regulations, and optimal performance for residential and commercial properties.</p>
+                <a href="https://wa.me/917012394124?text=Hi,%20I'm%20interested%20in%20Electrical%20Inspections" class="btn btn-primary" target="_blank" rel="noopener">Enquire Now</a></div>
+            </article>
+            <article class="service-card fade-in" data-delay="4">
+              <div class="service-card-img"><img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&amp;fit=crop&amp;w=800&amp;h=450&amp;q=80" alt="Data and network cabling infrastructure" loading="lazy"></div>
+              <div class="service-card-body"><h3>Data and Communication Cabling</h3><p>Reliable data and communication cabling solutions designed to support seamless connectivity and efficient network performance.</p>
+                <a href="https://wa.me/917012394124?text=Hi,%20I'm%20interested%20in%20Data%20and%20Communication%20Cabling" class="btn btn-primary" target="_blank" rel="noopener">Enquire Now</a></div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="projects" aria-label="Ongoing projects">
+        <div class="container">
+          <div class="section-header fade-in"><h2>Ongoing Projects</h2><p>Here are some of our ongoing projects</p></div>
+          <div class="projects-grid">
+            <article class="project-card fade-in" data-delay="0">
+              <img src="project-calicut.png" alt="Thai Group Office, Link Road, Calicut" loading="lazy">
+              <div class="project-overlay"><div class="project-info"><h3>Calicut</h3><p>Thai Group Office, Link Road</p>
+                <a href="https://wa.me/917012394124" class="btn btn-outline" target="_blank" rel="noopener" aria-label="View Calicut project details">View Details</a></div></div>
+            </article>
+            <article class="project-card fade-in" data-delay="1">
+              <img src="project-vadakara.png" alt="Dr. Mohankumars Flat, Nut Street, Vadakara" loading="lazy">
+              <div class="project-overlay"><div class="project-info"><h3>Vadakara</h3><p>Dr. Mohankumars Flat, Nut Street</p>
+                <a href="https://wa.me/917012394124" class="btn btn-outline" target="_blank" rel="noopener" aria-label="View Vadakara project details">View Details</a></div></div>
+            </article>
+            <article class="project-card fade-in" data-delay="2">
+              <img src="project-kalachi.png" alt="Vanimal Jumaath Palli, Kalachi" loading="lazy">
+              <div class="project-overlay"><div class="project-info"><h3>Kalachi</h3><p>Vanimal Jumaath Palli</p>
+                <a href="https://wa.me/917012394124" class="btn btn-outline" target="_blank" rel="noopener" aria-label="View Kalachi project details">View Details</a></div></div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-alt" id="portfolio" aria-label="Previous works">
+        <div class="container">
+          <div class="section-header fade-in"><h2>Our Previous Works</h2></div>
+          <div class="masonry">
+            <article class="masonry-item fade-in" data-delay="0">
+              <img src="work-xylem.png" alt="Xylem Thrissur Campus reception" loading="lazy">
+              <div class="masonry-item-content"><h3>Xylem Thrissur Campus</h3><p>MV addition, HT metering panel, and documentation work.</p></div>
+            </article>
+            <article class="masonry-item fade-in" data-delay="1">
+              <img src="work-valayanad-temple.png" alt="Valayanad Devi Temple Kozhikode" loading="lazy">
+              <div class="masonry-item-content"><h3>Valayanad Devi Temple, Kozhikode</h3><p>MV addition, HT metering panel, and documentation work.</p></div>
+            </article>
+            <article class="masonry-item fade-in" data-delay="2">
+              <img src="work-fathimabi.png" alt="Fathimabi Charitable Trust auditorium" loading="lazy">
+              <div class="masonry-item-content"><h3>Fathimabi Charitable Trust</h3><p>Power work of auditorium building — 40kW connected load + 100kVA DG set.</p></div>
+            </article>
+            <article class="masonry-item fade-in" data-delay="3">
+              <img src="work-centerline.png" alt="Centerline Clinic Perintalmanna" loading="lazy">
+              <div class="masonry-item-content"><h3>Centerline Clinic, Perintalmanna</h3><p>MV addition, HT metering panel, and documentation work.</p></div>
+            </article>
+            <article class="masonry-item fade-in" data-delay="4">
+              <img src="work-mra.png" alt="MRA Group food processing unit" loading="lazy">
+              <div class="masonry-item-content"><h3>MRA Group — Food Processing Unit</h3><p>Electrification of factory building — 100kW connected load + 50kVA DG set.</p></div>
+            </article>
+            <article class="masonry-item fade-in" data-delay="5">
+              <img src="work-parco.png" alt="Parco Group Swarnanjali Gold and Diamonds Kozhikode" loading="lazy">
+              <div class="masonry-item-content"><h3>Parco Group — Swarnanjali Gold &amp; Diamonds</h3><p>Electrical installation and panel work for jewellery showroom, Nut Street, Kozhikode.</p></div>
+            </article>
+            <article class="masonry-item fade-in" data-delay="6">
+              <img src="work-kalpetta.png" alt="Swarnanjali Gold and Diamonds Kalpetta showroom" loading="lazy">
+              <div class="masonry-item-content"><h3>Kalpetta Showroom</h3><p>Electrical installation and lighting work for Swarnanjali Gold &amp; Diamonds showroom, Kalpetta.</p></div>
+            </article>
+            <article class="masonry-item fade-in" data-delay="7">
+              <img src="work-mosque-palathazhi.png" alt="Mosque Palathazhi" loading="lazy">
+              <div class="masonry-item-content"><h3>Mosque Palathazhi</h3><p>Electrical renovation, lighting, and power distribution work for Juma Masjid.</p></div>
+            </article>
+            <article class="masonry-item fade-in" data-delay="8">
+              <img src="work-suraj-foods.png" alt="Suraj Foods Ottapalam" loading="lazy">
+              <div class="masonry-item-content"><h3>Suraj Foods, Ottapalam</h3><p>Factory electrification and power distribution for food processing unit.</p></div>
+            </article>
+            <article class="masonry-item fade-in" data-delay="9">
+              <img src="work-skyline-apartment.png" alt="Skyline Grand Apartment" loading="lazy">
+              <div class="masonry-item-content"><h3>Skyline Grand Apartment</h3><p>Complete electrical wiring, lighting, and fit-out for residential apartment.</p></div>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section class="section" id="gallery" aria-label="Gallery">
+        <div class="container">
+          <div class="section-header fade-in"><h2>Gallery</h2><p>Ongoing projects &amp; previous works</p></div>
+          <div class="gallery-carousel fade-in" id="galleryCarousel">
+            <div class="gallery-viewport" aria-roledescription="carousel">
+              <button type="button" class="gallery-arrow gallery-prev" id="galleryPrev" aria-label="Previous image">‹</button>
+              <div class="gallery-track" id="galleryTrack"></div>
+              <button type="button" class="gallery-arrow gallery-next" id="galleryNext" aria-label="Next image">›</button>
+            </div>
+            <div class="gallery-nav-dots" aria-label="Gallery navigation">
+              <button type="button" class="gallery-dot-btn gallery-dot-side" id="galleryDotPrev" aria-label="Previous slide"></button>
+              <button type="button" class="gallery-dot-btn gallery-dot-center" id="galleryDotCurrent" aria-label="Current slide" aria-current="true" tabindex="-1"></button>
+              <button type="button" class="gallery-dot-btn gallery-dot-side" id="galleryDotNext" aria-label="Next slide"></button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-alt" id="contact" aria-label="Contact us">
+        <div class="container">
+          <div class="section-header fade-in"><h2>Contact Us</h2></div>
+          <div class="contact-grid">
+            <form class="contact-form fade-in" id="contactForm" novalidate aria-label="Contact form">
+              <div class="form-group"><input type="text" id="fullName" name="fullName" placeholder=" " required aria-required="true"><label for="fullName">Full Name</label></div>
+              <div class="form-group"><input type="tel" id="phone" name="phone" placeholder=" " required aria-required="true"><label for="phone">Phone Number</label></div>
+              <div class="form-group"><input type="email" id="email" name="email" placeholder=" " required aria-required="true"><label for="email">Email Address</label></div>
+              <div class="form-group filled" id="serviceGroup">
+                <select id="service" name="service" required aria-required="true">
+                  <option value="" disabled selected></option>
+                  <option value="Electrical Installations">Electrical Installations</option>
+                  <option value="Repairs and Maintenance">Repairs and Maintenance</option>
+                  <option value="Panel Upgrades">Panel Upgrades</option>
+                  <option value="Electrical Inspections">Electrical Inspections</option>
+                  <option value="Data and Communication Cabling">Data and Communication Cabling</option>
+                </select>
+                <label for="service">Service Interested In</label>
+              </div>
+              <div class="form-group"><textarea id="message" name="message" placeholder=" " required aria-required="true"></textarea><label for="message">Message</label></div>
+              <button type="submit" class="btn btn-primary" style="width:100%">Send Message</button>
+            </form>
+            <div class="contact-info fade-in">
+              <h3>Get In Touch</h3>
+              <div class="info-item"><div class="info-icon" aria-hidden="true">📍</div><div><strong>Address</strong><p>Hilite Business Park, Palazhi, Near Hilite Business Mall, Kozhikode, Kerala — 657672</p></div></div>
+              <div class="info-item"><div class="info-icon" aria-hidden="true">📞</div><div><strong>Phone</strong><p><a href="tel:+917012394124">+91 7012394124</a></p></div></div>
+              <div class="info-item"><div class="info-icon" aria-hidden="true">💬</div><div><strong>WhatsApp</strong><p><a href="https://wa.me/917012394124" target="_blank" rel="noopener">+91 7012394124</a></p></div></div>
+              <div class="info-item"><div class="info-icon" aria-hidden="true">✉️</div><div><strong>Email</strong><p><a href="mailto:sangeethkaryattu@gmail.com">sangeethkaryattu@gmail.com</a></p></div></div>
+              <div class="info-item"><div class="info-icon" aria-hidden="true">🕐</div><div><strong>Working Hours</strong><p>Mon–Sun, 09:30 AM – 6:30 PM</p></div></div>
+              <div class="map-wrap"><iframe src="https://maps.google.com/maps?q=11.247847637046045,75.8339137583971&z=15&output=embed" title="Future Tech Associates location map" loading="lazy" allowfullscreen></iframe></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer aria-label="Footer">
+      <div class="footer-top">
+        <img src="logo.png" alt="Future Tech Associates">
+        <h3>Future Tech Associates</h3>
+      </div>
+      <div class="footer-grid">
+        <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="#home">Home</a></li><li><a href="#about">About</a></li><li><a href="#services">Services</a></li><li><a href="#projects">Projects</a></li><li><a href="#gallery">Gallery</a></li><li><a href="#contact">Contact</a></li></ul></div>
+        <div class="footer-col"><h4>Services</h4><ul><li><a href="#services">Electrical Installations</a></li><li><a href="#services">Repairs &amp; Maintenance</a></li><li><a href="#services">Panel Upgrades</a></li><li><a href="#services">Electrical Inspections</a></li><li><a href="#services">Data &amp; Communication Cabling</a></li></ul></div>
+        <div class="footer-col"><h4>Contact Info</h4><ul><li>Hilite Business Park, Palazhi, Kozhikode</li><li><a href="tel:+917012394124">+91 7012394124</a></li><li><a href="mailto:sangeethkaryattu@gmail.com">sangeethkaryattu@gmail.com</a></li><li>Mon–Sun, 09:30 AM – 6:30 PM</li></ul></div>
+      </div>
+      <div class="social-row" aria-label="Social media links">
+        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+        <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+        <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.062 2.062 0 012.063-2.065 2.062 2.062 0 012.063 2.065 2.062 2.062 0 01-2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+      </div>
+      <div class="footer-bottom"><p>© 2024 Future Tech Associates. All Rights Reserved.</p></div>
+    </footer>
+  </div>
+
+  <div class="fab-group" aria-label="Quick actions">
+    <a href="tel:+917012394124" class="fab fab-call" aria-label="Call us" title="Call"><svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.36 11.36 0 003.56.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11.36 11.36 0 00.57 3.56 1 1 0 01-.24 1.01l-2.2 2.2z" fill="#fff"/></svg></a>
+    <a href="https://wa.me/917012394124" class="fab fab-wa fab-wa-btn" target="_blank" rel="noopener" aria-label="WhatsApp us" title="WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+    <button class="fab fab-share" id="shareFab" aria-label="Share this page" title="Share"><svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z" fill="#fff"/></svg></button>
+  </div>
+
+  <button class="scroll-top" id="scrollTop" aria-label="Scroll to top">↑</button>
+  <div class="toast" id="toast" role="alert" aria-live="polite"></div>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Expanded gallery image">
+    <button type="button" class="lightbox-close" id="lightboxClose" aria-label="Close expanded image">×</button>
+    <div class="lightbox-inner">
+      <button type="button" class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous image">‹</button>
+      <div class="lightbox-img-wrap">
+        <img id="lightboxImg" src="" alt="">
+      </div>
+      <button type="button" class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next image">›</button>
+    </div>
+    <p class="lightbox-caption" id="lightboxCaption"></p>
+  </div>
+
+  <div class="modal-overlay" id="shareModal" role="dialog" aria-modal="true" aria-label="Share options">
+    <div class="modal">
+      <button class="modal-close" id="shareModalClose" aria-label="Close share modal">×</button>
+      <h3>Share This Page</h3>
+      <div class="share-options" id="shareMain">
+        <div class="share-card" id="copyLink" tabindex="0" role="button" aria-label="Copy link"><div class="share-card-icon">🔗</div><span>Copy Link</span></div>
+        <div class="share-card" id="showQR" tabindex="0" role="button" aria-label="Show QR code"><div class="share-card-icon">📱</div><span>QR Code</span></div>
+        <div class="share-card" id="showSocial" tabindex="0" role="button" aria-label="Share on social media"><div class="share-card-icon">📤</div><span>Share on Social</span></div>
+      </div>
+      <div id="qrcode" style="display:none"></div>
+      <div class="social-share" id="socialShare">
+        <a class="social-btn wa" id="shareWA" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="social-btn fb" id="shareFB" target="_blank" rel="noopener">Facebook</a>
+        <a class="social-btn li" id="shareLI" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="social-btn tw" id="shareTW" target="_blank" rel="noopener">Twitter / X</a>
+      </div>
+    </div>
+  </div>
+  <script>
+  (function() {
+    'use strict';
+    const TAGLINE = 'We specialize in delivering cutting-edge electrical solutions tailored to your needs, ensuring safety, efficiency, and reliability.';
+    let qrGenerated = false;
+
+    /* Loader */
+    setTimeout(() => {
+      document.getElementById('loader').classList.add('hidden');
+      document.getElementById('main-content').classList.add('visible');
+    }, 2500);
+
+    /* Typewriter */
+    const tw = document.getElementById('typewriter');
+    let ci = 0;
+    function typeChar() {
+      if (ci < TAGLINE.length) { tw.textContent += TAGLINE[ci++]; setTimeout(typeChar, 35); }
+    }
+    setTimeout(typeChar, 2800);
+
+    /* Hero particles */
+    const particles = document.getElementById('heroParticles');
+    for (let i = 0; i < 18; i++) {
+      const s = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      s.setAttribute('class', 'spark');
+      s.setAttribute('width', '24'); s.setAttribute('height', '24');
+      s.style.cssText = `position:absolute;left:${Math.random()*100}%;top:${Math.random()*100}%;opacity:${0.3+Math.random()*0.5};animation:spark-float ${3+Math.random()*4}s ease-in-out infinite ${Math.random()*2}s`;
+      s.innerHTML = '<path d="M12 2L14 10L22 12L14 14L12 22L10 14L2 12L10 10Z" fill="#f40101" opacity="0.8"/>';
+      particles.appendChild(s);
+    }
+    const style = document.createElement('style');
+    style.textContent = '@keyframes spark-float{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-20px) rotate(180deg)}}';
+    document.head.appendChild(style);
+
+    /* Navbar */
+    const navbar = document.getElementById('navbar');
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('compact', window.scrollY > 60);
+      document.getElementById('scrollTop').classList.toggle('visible', window.scrollY > 400);
+    });
+    hamburger.addEventListener('click', () => {
+      const open = hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open', open);
+      hamburger.setAttribute('aria-expanded', open);
+    });
+    document.querySelectorAll('.mobile-menu a, .nav-links a').forEach(a => {
+      a.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    /* Active nav */
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('[data-section]');
+    const obsNav = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          navLinks.forEach(l => l.classList.toggle('active', l.dataset.section === e.target.id));
+        }
+      });
+    }, { rootMargin: '-40% 0px -50% 0px' });
+    sections.forEach(s => obsNav.observe(s));
+
+    /* Scroll top */
+    document.getElementById('scrollTop').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    /* Fade-in + stagger */
+    const fadeObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const el = e.target;
+          const delay = (el.dataset.delay || 0) * 0.1;
+          setTimeout(() => el.classList.add('visible'), delay * 1000);
+          fadeObs.unobserve(el);
+        }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.fade-in, .section-header').forEach(el => fadeObs.observe(el));
+
+    /* Stat counters */
+    const countObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        const el = e.target;
+        const target = +el.dataset.target;
+        const suffix = el.dataset.suffix || '';
+        let cur = 0;
+        const step = Math.ceil(target / 40);
+        const timer = setInterval(() => {
+          cur = Math.min(cur + step, target);
+          el.textContent = cur + suffix;
+          if (cur >= target) clearInterval(timer);
+        }, 40);
+        countObs.unobserve(el);
+      });
+    }, { threshold: 0.3 });
+    document.querySelectorAll('.stat-num').forEach(el => countObs.observe(el));
+
+    /* Contact form */
+    const form = document.getElementById('contactForm');
+    const serviceSelect = document.getElementById('service');
+    serviceSelect.addEventListener('change', () => document.getElementById('serviceGroup').classList.add('filled'));
+    form.querySelectorAll('input, textarea').forEach(inp => {
+      inp.addEventListener('input', () => inp.parentElement.classList.toggle('filled', inp.value.length > 0));
+    });
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg; t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 3500);
+    }
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const fields = ['fullName','phone','email','message'];
+      let valid = true;
+      fields.forEach(id => {
+        const el = document.getElementById(id);
+        if (!el.value.trim()) { valid = false; el.style.borderColor = '#f40101'; }
+        else el.style.borderColor = '';
+      });
+      if (!serviceSelect.value) { valid = false; serviceSelect.style.borderColor = '#f40101'; }
+      else serviceSelect.style.borderColor = '';
+      if (!valid) return;
+      showToast("Thank you! We'll contact you shortly.");
+      form.reset();
+      document.getElementById('serviceGroup').classList.remove('filled');
+    });
+
+    /* Gallery carousel */
+    const GALLERY_SLIDES = [
+      { src: 'project-calicut.png', caption: 'Ongoing — Thai Group Office, Calicut' },
+      { src: 'project-vadakara.png', caption: 'Ongoing — Dr. Mohankumars Flat, Vadakara' },
+      { src: 'project-kalachi.png', caption: 'Ongoing — Vanimal Jumaath Palli, Kalachi' },
+      { src: 'work-xylem.png', caption: 'Xylem Thrissur Campus' },
+      { src: 'work-valayanad-temple.png', caption: 'Valayanad Devi Temple, Kozhikode' },
+      { src: 'work-fathimabi.png', caption: 'Fathimabi Charitable Trust' },
+      { src: 'work-centerline.png', caption: 'Centerline Clinic, Perintalmanna' },
+      { src: 'work-mra.png', caption: 'MRA Group — Food Processing Unit' },
+      { src: 'work-parco.png', caption: 'Parco Group — Swarnanjali Gold & Diamonds' },
+      { src: 'work-kalpetta.png', caption: 'Kalpetta Showroom' },
+      { src: 'work-mosque-palathazhi.png', caption: 'Mosque Palathazhi' },
+      { src: 'work-suraj-foods.png', caption: 'Suraj Foods, Ottapalam' },
+      { src: 'work-skyline-apartment.png', caption: 'Skyline Grand Apartment' }
+    ];
+    const galleryTrack = document.getElementById('galleryTrack');
+    const galleryPrev = document.getElementById('galleryPrev');
+    const galleryNext = document.getElementById('galleryNext');
+    const galleryDotPrev = document.getElementById('galleryDotPrev');
+    const galleryDotNext = document.getElementById('galleryDotNext');
+    const galleryDotCurrent = document.getElementById('galleryDotCurrent');
+    const slideHtml = (s, i) => `<div class="gallery-slide" data-index="${i}" role="button" tabindex="0" aria-label="View full size: ${s.caption}"><img src="${s.src}" alt="${s.caption}" loading="lazy"><span class="gallery-slide-caption">${s.caption}</span></div>`;
+    galleryTrack.innerHTML = GALLERY_SLIDES.map((s, i) => slideHtml(s, i)).join('');
+    let galleryIndex = 0;
+    const galleryLast = GALLERY_SLIDES.length - 1;
+    function updateGallery() {
+      galleryTrack.style.transform = `translateX(-${galleryIndex * 100}%)`;
+      galleryPrev.disabled = galleryIndex === 0;
+      galleryNext.disabled = galleryIndex === galleryLast;
+      galleryDotPrev.disabled = galleryIndex === 0;
+      galleryDotNext.disabled = galleryIndex === galleryLast;
+      galleryDotCurrent.setAttribute('aria-label', `Slide ${galleryIndex + 1} of ${GALLERY_SLIDES.length}: ${GALLERY_SLIDES[galleryIndex].caption}`);
+    }
+    function galleryGo(dir) {
+      galleryIndex = Math.max(0, Math.min(galleryLast, galleryIndex + dir));
+      updateGallery();
+    }
+    galleryPrev.addEventListener('click', () => galleryGo(-1));
+    galleryNext.addEventListener('click', () => galleryGo(1));
+    galleryDotPrev.addEventListener('click', () => galleryGo(-1));
+    galleryDotNext.addEventListener('click', () => galleryGo(1));
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxCaption = document.getElementById('lightboxCaption');
+    const lightboxPrevBtn = document.getElementById('lightboxPrev');
+    const lightboxNextBtn = document.getElementById('lightboxNext');
+    let lightboxIndex = 0;
+    let lbTouchX = 0;
+    function updateLightbox() {
+      const s = GALLERY_SLIDES[lightboxIndex];
+      lightboxImg.src = s.src;
+      lightboxImg.alt = s.caption;
+      lightboxCaption.textContent = s.caption;
+      lightboxPrevBtn.disabled = lightboxIndex === 0;
+      lightboxNextBtn.disabled = lightboxIndex === galleryLast;
+    }
+    function openLightbox(i) {
+      lightboxIndex = i;
+      updateLightbox();
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    function lightboxGo(dir) {
+      lightboxIndex = Math.max(0, Math.min(galleryLast, lightboxIndex + dir));
+      updateLightbox();
+    }
+    galleryTrack.querySelectorAll('.gallery-slide').forEach(slide => {
+      slide.addEventListener('click', () => openLightbox(+slide.dataset.index));
+      slide.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(+slide.dataset.index); } });
+    });
+    document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+    lightboxPrevBtn.addEventListener('click', e => { e.stopPropagation(); lightboxGo(-1); });
+    lightboxNextBtn.addEventListener('click', e => { e.stopPropagation(); lightboxGo(1); });
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', e => {
+      if (!lightbox.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') lightboxGo(-1);
+      if (e.key === 'ArrowRight') lightboxGo(1);
+    });
+    lightbox.addEventListener('touchstart', e => { lbTouchX = e.changedTouches[0].screenX; }, { passive: true });
+    lightbox.addEventListener('touchend', e => {
+      const d = e.changedTouches[0].screenX - lbTouchX;
+      if (Math.abs(d) > 50) lightboxGo(d > 0 ? -1 : 1);
+    }, { passive: true });
+    let touchX = 0, touchY = 0;
+    galleryTrack.parentElement.addEventListener('touchstart', e => {
+      if (e.target.closest('.gallery-arrow')) return;
+      touchX = e.changedTouches[0].screenX;
+      touchY = e.changedTouches[0].screenY;
+    }, { passive: true });
+    galleryTrack.parentElement.addEventListener('touchend', e => {
+      if (e.target.closest('.gallery-arrow')) return;
+      const dx = e.changedTouches[0].screenX - touchX;
+      const dy = e.changedTouches[0].screenY - touchY;
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) galleryGo(dx > 0 ? -1 : 1);
+      else if (Math.abs(dx) < 12 && Math.abs(dy) < 12 && e.target.closest('.gallery-slide')) {
+        openLightbox(+e.target.closest('.gallery-slide').dataset.index);
+      }
+    }, { passive: true });
+    updateGallery();
+
+    /* Share modal */
+    const shareModal = document.getElementById('shareModal');
+    const pageUrl = encodeURIComponent(window.location.href);
+    const pageTitle = encodeURIComponent('Future Tech Associates');
+    document.getElementById('shareFab').addEventListener('click', () => {
+      shareModal.classList.add('open');
+      document.getElementById('socialShare').classList.remove('show');
+      document.getElementById('qrcode').style.display = 'none';
+      document.getElementById('shareMain').style.display = 'grid';
+    });
+    document.getElementById('shareModalClose').addEventListener('click', () => shareModal.classList.remove('open'));
+    shareModal.addEventListener('click', e => { if (e.target === shareModal) shareModal.classList.remove('open'); });
+    document.getElementById('copyLink').addEventListener('click', () => {
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        showToast('Link Copied!');
+        shareModal.classList.remove('open');
+      });
+    });
+    document.getElementById('showQR').addEventListener('click', () => {
+      document.getElementById('shareMain').style.display = 'none';
+      const qrEl = document.getElementById('qrcode');
+      qrEl.style.display = 'flex';
+      qrEl.innerHTML = '';
+      if (typeof QRCode !== 'undefined') {
+        new QRCode(qrEl, { text: window.location.href, width: 200, height: 200, colorDark: '#f40101', colorLight: '#ffffff' });
+      }
+    });
+    document.getElementById('showSocial').addEventListener('click', () => {
+      document.getElementById('shareMain').style.display = 'none';
+      document.getElementById('qrcode').style.display = 'none';
+      document.getElementById('socialShare').classList.add('show');
+    });
+    document.getElementById('shareWA').href = `https://wa.me/?text=${pageTitle}%20${pageUrl}`;
+    document.getElementById('shareFB').href = `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`;
+    document.getElementById('shareLI').href = `https://www.linkedin.com/sharing/share-offsite/?url=${pageUrl}`;
+    document.getElementById('shareTW').href = `https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`;
+  })();
+  </script>
+</body>
+</html>
